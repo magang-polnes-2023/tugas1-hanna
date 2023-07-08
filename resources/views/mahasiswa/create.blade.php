@@ -2,7 +2,7 @@
 
 @section('konten')
     <!-- START FORM -->
-    <form action='{{ route('mahasiswa.store') }}' method='post' enctype="multipart/form-data">
+    <form action="{{ route('mahasiswa.store') }}" method='post' enctype="multipart/form-data">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger mt-3" role="alert" id="danger-alert">
@@ -61,14 +61,14 @@
                 <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1"
-                            value="option1" checked>
+                            value="Laki-Laki" checked>
                         <label class="form-check-label" for="jenis_kelamin1">
                             Laki-Laki
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2"
-                            value="option2">
+                            value="Perempuan">
                         <label class="form-check-label" for="jenis_kelamin2">
                             Perempuan
                         </label>

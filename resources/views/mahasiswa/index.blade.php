@@ -43,16 +43,15 @@
                             <td>
                                 <form onsubmit="return confirm('Menghapus Data?');"
                                     action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">
-                                    <a href="{{ route('mahasiswa.show', $data->id) }}" type="button"
-                                        class="btn btn-warning btn-sm">Edit</a>
                                     <a href="{{ route('mahasiswa.edit', $data->id) }}" type="button"
+                                        class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ route('mahasiswa.show', $data->id) }}" type="button"
                                         class="btn btn-dark btn-sm">Show</a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submin" class="btn btn-sm btn-danger">DELETE</button>
                                 </form>
                             </td>
-                            <td></td>
                         </tr>
                     @endforeach
                 @else

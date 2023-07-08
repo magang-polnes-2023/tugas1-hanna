@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\mahasiswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storange;
+use Illuminate\Support\Facades\Storage;
 
 class mahasiswaController extends Controller
 {
@@ -75,7 +75,9 @@ class mahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = mahasiswa::findOrFail($id);
+
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -83,7 +85,50 @@ class mahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'nama'=>'required',
+            'nim'=>'required',
+            'no_telp'=>'required',
+            'umur'=>'required',
+            'alamat'=>'required',
+            'tanggal_lahir'=>'required',
+            'jenis_kelamin'=>'required',
+            'gambar'=>'required|image|mimes:jpeg,jpg,png|max:2048'
+        ]);
+
+        $mahasiswa = mahasiswa::findOrFail($id);
+
+        if ($request->hasFile('gambar')) {
+
+            $gambar = $request->file('gambar');
+            $gambar->storeAs('public/posts', $gambar->hashName());
+
+            Storage::delete('public/posts'.$mahasiswa->gambar);
+
+            $mahasiswa->update([
+                'nama'=>$request->nama,
+                'nim'=>$request->nim,
+                'no_telp'=>$request->no_telp,
+                'umur'=>$request->umur,
+                'alamat'=>$request->alamat,
+                'tanggal_lahir'=>$request->tanggal_lahir,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+                'gambar'=>$gambar->hashName()
+            ]);
+        
+        } else {
+            $mahasiswa->update([
+                'nama'=>$request->nama,
+                'nim'=>$request->nim,
+                'no_telp'=>$request->no_telp,
+                'umur'=>$request->umur,
+                'alamat'=>$request->alamat,
+                'tanggal_lahir'=>$request->tanggal_lahir,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+            ]);
+        }
+
+        return redirect()->route('mahasiswa.index')->with(['success' =>'Data Berhasil di Update!']);
     }
 
     /**
