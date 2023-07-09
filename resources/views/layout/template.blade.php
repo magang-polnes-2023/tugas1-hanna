@@ -27,7 +27,8 @@
                             <a class="nav-link active" aria-current="page" href="{{ url('mahasiswa') }}">Mahasiswa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/universitas">Universitas</a>
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ url('universitas') }}">Universitas</a>
                         </li>
                     </ul>
                 </div>

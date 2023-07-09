@@ -14,7 +14,7 @@
 
         <!-- TOMBOL TAMBAH DATA -->
         <div class="pb-3">
-            <a href={{ route('mahasiswa.create') }} class="btn btn-primary">+ Tambah Data</a>
+            <a href="{{ route('universitas.create') }}" class="btn btn-primary">+ Tambah Data</a>
         </div>
         @if (Session::has('success'))
             <div class="alert alert-success mt-3" role="alert">
@@ -25,31 +25,28 @@
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>
-                    <th class="col-md-2">Gambar</th>
                     <th class="col-md-2">Nama</th>
-                    <th class="col-md-2">NIM</th>
-                    <th class="col-md-2">Tanggal Lahir</th>
+                    <th class="col-md-2">Alamat</th>
+                    <th class="col-md-2">Email</th>
+                    <th class="col-md-2">Akreditas</th>
                     <th class="col-md-3">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($mahasiswa->count() > 0)
-                    @foreach ($mahasiswa as $data)
+                @if ($universitas->count() > 0)
+                    @foreach ($universitas as $data)
                         <tr>
                             <td class="text-middle">{{ $loop->iteration }}</td>
-                            <td class="text-middle">
-                                <img src="{{ asset('/storage/posts/' . $data->gambar) }}" class="rounded"
-                                    style="width:70px">
-                            </td>
                             <td class="text-middle">{{ $data->nama }}</td>
-                            <td class="text-middle">{{ $data->nim }}</td>
-                            <td class="text-middle">{{ $data->tanggal_lahir }}</td>
+                            <td class="text-middle">{{ $data->alamat }}</td>
+                            <td class="text-middle">{{ $data->email }}</td>
+                            <td class="text-middle">{{ $data->akreditas }}</td>
                             <td>
                                 <form onsubmit="return confirm('Menghapus Data?');"
-                                    action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">
-                                    <a href="{{ route('mahasiswa.edit', $data->id) }}" type="button"
+                                    action="{{ route('universitas.destroy', $data->id) }}" method="POST">
+                                    <a href="{{ route('universitas.edit', $data->id) }}" type="button"
                                         class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="{{ route('mahasiswa.show', $data->id) }}" type="button"
+                                    <a href="{{ route('universitas.show', $data->id) }}" type="button"
                                         class="btn btn-dark btn-sm">Show</a>
                                     @csrf
                                     @method('DELETE')
@@ -60,7 +57,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="text-center" colspan="6">Tidak Ada Data Mahasiswa</td>
+                        <td class="text-center" colspan="6">Tidak Ada Data Universitas</td>
                     </tr>
                 @endif
             </tbody>
