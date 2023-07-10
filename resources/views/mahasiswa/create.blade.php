@@ -61,7 +61,7 @@
                 <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1"
-                            value="Laki-Laki" checked>
+                            value="Laki-Laki">
                         <label class="form-check-label" for="jenis_kelamin1">
                             Laki-Laki
                         </label>

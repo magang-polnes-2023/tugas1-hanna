@@ -61,14 +61,14 @@
                 <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1"
-                            value="Laki-Laki"{{ $mahasiswa->jenis_kelamin == 'Laki-Laki' ? 'checked' : '' }}>
+                            value="Laki-Laki" {{ $mahasiswa->jenis_kelamin == 'Laki-Laki' ? 'checked' : '' }}>
                         <label class="form-check-label" for="jenis_kelamin1">
                             Laki-Laki
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2"
-                            value="Perempuan"{{ $mahasiswa->jenis_kelamin == 'Perempuan' ? 'checked' : '' }}>
+                            value="Perempuan" {{ $mahasiswa->jenis_kelamin == 'Perempuan' ? 'checked' : '' }}>
                         <label class="form-check-label" for="jenis_kelamin2">
                             Perempuan
                         </label>
