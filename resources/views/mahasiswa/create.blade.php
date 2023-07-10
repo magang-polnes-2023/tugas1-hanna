@@ -21,6 +21,16 @@
         @endif
         <div class="my-3 p-3 bg-body rounded shadow-sm">
             <div class="mb-3 row">
+                <label for="nama" class="col-sm-2 col-form-label">Pilih Universitas</label>
+                <div class="col-sm-10">
+                    <select class="form-control select" name="universitas_id" id="universitas_id">
+                        @foreach ($univ as $univ)
+                            <option value="{{ $univ->id }}">{{ $univ->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name='nama' id="nama">

@@ -9,6 +9,7 @@ class mahasiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'universitas_id',
         'nama',
         'nim',
         'no_telp',
@@ -19,4 +20,9 @@ class mahasiswa extends Model
         'gambar'
     ];
     protected $table = 'mahasiswa';
+
+    public function universitas()
+    {
+        return $this->belongsTo(universitas::class);
+    }
 }

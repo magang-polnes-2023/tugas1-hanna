@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\mahasiswa;
+use App\Models\universitas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,7 @@ class mahasiswaController extends Controller
                 ->orWhere('nama','like',"%$katakunci%")
                 ->paginate(5);
         }else{
-             $mahasiswa = mahasiswa::latest()->paginate(5);
+             $mahasiswa = mahasiswa::with('universitas')->latest()->paginate(5);
         }
         return view('mahasiswa.index', compact('mahasiswa'));
     }
@@ -29,7 +30,8 @@ class mahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        $univ = universitas::all();
+        return view('mahasiswa.create', compact('univ'));
     }
 
     /**
@@ -38,6 +40,7 @@ class mahasiswaController extends Controller
     public function store(Request $request)
     {
       $this->validate($request, [
+        'universitas_id'=>'required',
         'nama'=>'required',
         'nim'=>'required',
         'no_telp'=>'required',
@@ -53,6 +56,7 @@ class mahasiswaController extends Controller
       $gambar->storeAs('public/posts', $gambar->hashName());
     
       mahasiswa::create([
+        'universitas_id'=>$request->universitas_id,
         'nama'=>$request->nama,
         'nim'=>$request->nim,
         'no_telp'=>$request->no_telp,
@@ -73,8 +77,8 @@ class mahasiswaController extends Controller
     public function show(string $id)
     {
         $mahasiswa = mahasiswa::findOrFail($id);
-
-        return view('mahasiswa.show', compact('mahasiswa'));
+        $univ = universitas::all();
+        return view('mahasiswa.show', compact('mahasiswa', 'univ'));
     }
 
     /**
@@ -83,8 +87,8 @@ class mahasiswaController extends Controller
     public function edit(string $id)
     {
         $mahasiswa = mahasiswa::findOrFail($id);
-
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        $univ = universitas::all();
+        return view('mahasiswa.edit', compact('mahasiswa', 'univ'));
     }
 
     /**
@@ -93,6 +97,7 @@ class mahasiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
+            'universitas_id'=>'required',
             'nama'=>'required',
             'nim'=>'required',
             'no_telp'=>'required',
@@ -113,6 +118,7 @@ class mahasiswaController extends Controller
             Storage::delete('public/posts'.$mahasiswa->gambar);
 
             $mahasiswa->update([
+                'universitas_id'=>$request->universitas_id,
                 'nama'=>$request->nama,
                 'nim'=>$request->nim,
                 'no_telp'=>$request->no_telp,
@@ -125,6 +131,7 @@ class mahasiswaController extends Controller
         
         } else {
             $mahasiswa->update([
+                'universitas_id'=>$request->universitas_id,
                 'nama'=>$request->nama,
                 'nim'=>$request->nim,
                 'no_telp'=>$request->no_telp,

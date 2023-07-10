@@ -25,10 +25,10 @@
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>
+                    <th class="col-md-2">Nama Universitas</th>
                     <th class="col-md-2">Gambar</th>
                     <th class="col-md-2">Nama</th>
                     <th class="col-md-2">NIM</th>
-                    <th class="col-md-2">Tanggal Lahir</th>
                     <th class="col-md-3">Aksi</th>
                 </tr>
             </thead>
@@ -37,13 +37,13 @@
                     @foreach ($mahasiswa as $data)
                         <tr>
                             <td class="text-middle">{{ $loop->iteration }}</td>
+                            <td class="text-middle">{{ $data->universitas->nama }}</td>
                             <td class="text-middle">
                                 <img src="{{ asset('/storage/posts/' . $data->gambar) }}" class="rounded"
                                     style="width:70px">
                             </td>
                             <td class="text-middle">{{ $data->nama }}</td>
                             <td class="text-middle">{{ $data->nim }}</td>
-                            <td class="text-middle">{{ $data->tanggal_lahir }}</td>
                             <td>
                                 <form onsubmit="return confirm('Menghapus Data?');"
                                     action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">

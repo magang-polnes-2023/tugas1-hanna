@@ -10,10 +10,16 @@ class universitasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        $universitas = universitas::latest()->paginate(5);
-        return view('universitas.index', compact('universitas'));
+        $katakunci = $request->katakunci;
+        if (strlen($katakunci)){
+            $universitas = universitas::where('nama','like',"%$katakunci%")
+                ->paginate(5);
+        }else{
+            $universitas = universitas::with('mahasiswa')->latest()->paginate(5);
+        }
+            return view('universitas.index', compact('universitas'));
     }
 
     /**

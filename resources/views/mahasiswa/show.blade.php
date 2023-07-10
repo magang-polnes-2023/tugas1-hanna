@@ -15,6 +15,9 @@
                     <hr>
                     <h4>Nama : {{ $mahasiswa->nama }}</h4>
                     <p class="tmt-3">
+                        Nama Universitas : {!! $mahasiswa->universitas->nama !!}
+                    </p>
+                    <p class="tmt-3">
                         NIM : {!! $mahasiswa->nim !!}
                     </p>
                     <p class="tmt-3">
